@@ -1,88 +1,65 @@
 # ShiftexBD Server
 
-Backend API for **ShiftexBD**, a modern parcel delivery and management platform.
+Backend API for **ShiftexBD**, a full-stack parcel delivery and management platform.
 
-This server handles parcel management, MongoDB database operations, Stripe payment processing, and REST API communication with the ShiftexBD frontend.
+The server handles parcel management, payment processing, tracking, MongoDB operations, and REST API communication with the ShiftexBD frontend.
 
 ---
 
 ## 🌐 Project
 
 - **Live Website:** https://shiftex-bd.web.app
+- **Backend API:** https://shiftex-bd-server.onrender.com
 - **Client Repository:** https://github.com/silent-43/shiftex-bd-client
 - **Server Repository:** https://github.com/silent-43/shiftex-bd-server
 
 ---
 
-## 📌 About The Project
-
-ShiftexBD Server is the backend service for the ShiftexBD parcel delivery platform.
-
-It provides REST APIs for:
-
-- Parcel creation
-- Parcel retrieval
-- User-specific parcel filtering
-- Parcel details
-- Parcel deletion
-- Stripe checkout session creation
-- Payment status update
-- MongoDB database operations
-
-The backend is built with Node.js and Express.js and uses MongoDB for data storage.
-
----
-
-## 🛠️ Technologies Used
+## 🛠️ Technologies
 
 - Node.js
 - Express.js
 - MongoDB
 - MongoDB Node.js Driver
 - Stripe
+- Firebase Admin
 - CORS
 - dotenv
+- Crypto
 - REST API
 
 ---
 
-## 📦 Main Features
+## ✨ Features
 
-### Parcel Management
+### 📦 Parcel Management
 
-The server provides APIs for managing parcels.
-
-- Create a new parcel
+- Create parcel
 - Get all parcels
 - Get parcels by sender email
-- Get a single parcel by ID
-- Delete a parcel
+- Get parcel by ID
+- Delete parcel
 - Sort parcels by creation date
-
----
+- Update parcel payment status
+- Store parcel tracking ID
 
 ### 💳 Stripe Payment
 
-The backend integrates **Stripe Checkout** for parcel payments.
-
-Features include:
-
-- Create Stripe Checkout Session
-- Customer email integration
-- Parcel ID stored in Stripe metadata
+- Stripe Checkout integration
+- Create checkout session
+- Customer email handling
+- Parcel information in Stripe metadata
+- Payment verification
+- Payment status update
 - Payment success handling
-- Payment status update in MongoDB
-- Success and cancelled payment redirects
+- Cancelled payment redirect
 
----
+### 🔎 Tracking
 
-### 🗄️ MongoDB
+After successful payment, the server automatically generates a unique tracking ID.
 
-ShiftexBD uses MongoDB as the primary database.
-
-### Database
+Example:
 
 ```text
-Database: shiftex_bd_db
-Collection: parcels
+SBD-20260919-a7f3c2
 ```
