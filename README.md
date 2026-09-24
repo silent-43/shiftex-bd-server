@@ -2,10 +2,6 @@
 
 Backend API for **ShiftexBD**, a full-stack parcel delivery and management platform.
 
-The server handles parcel management, payment processing, tracking, MongoDB operations, and REST API communication with the ShiftexBD frontend.
-
----
-
 ## 🌐 Project
 
 - **Live Website:** https://shiftex-bd.web.app
@@ -13,14 +9,11 @@ The server handles parcel management, payment processing, tracking, MongoDB oper
 - **Client Repository:** https://github.com/silent-43/shiftex-bd-client
 - **Server Repository:** https://github.com/silent-43/shiftex-bd-server
 
----
-
 ## 🛠️ Technologies
 
 - Node.js
 - Express.js
 - MongoDB
-- MongoDB Node.js Driver
 - Stripe
 - Firebase Admin
 - CORS
@@ -28,35 +21,21 @@ The server handles parcel management, payment processing, tracking, MongoDB oper
 - Crypto
 - REST API
 
----
-
 ## ✨ Features
 
-### 📦 Parcel Management
+- 📦 **Parcel Management** — Create, read, update, delete, filter & sort parcels
+- 👤 **User Management** — User data storage & role-based access
+- 🔐 **Authentication & Security** — Firebase Admin, JWT authorization & backend role verification
+- 💳 **Stripe Payments** — Checkout, payment verification, transaction data & payment status
+- 🔎 **Tracking** — Automatic unique tracking ID generation
+- 🚴 **Rider Management** — Rider approval, assignment & delivery workflow
+- 🏢 **Warehouse Management** — Warehouse data & parcel handoff management
+- 📊 **Dashboard APIs** — Admin, rider & user-specific data
+- 🌐 **REST API** — Secure API communication with the ShiftexBD frontend
 
-- Create parcel
-- Get all parcels
-- Get parcels by sender email
-- Get parcel by ID
-- Delete parcel
-- Sort parcels by creation date
-- Update parcel payment status
-- Store parcel tracking ID
+## 🔎 Tracking ID
 
-### 💳 Stripe Payment
-
-- Stripe Checkout integration
-- Create checkout session
-- Customer email handling
-- Parcel information in Stripe metadata
-- Payment verification
-- Payment status update
-- Payment success handling
-- Cancelled payment redirect
-
-### 🔎 Tracking
-
-After successful payment, the server automatically generates a unique tracking ID.
+Tracking IDs are automatically generated after successful payment.
 
 Example:
 
