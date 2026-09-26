@@ -198,25 +198,36 @@ async function run() {
 
     })
 
-app.get('/parcels/rider', async(req, res) => {
-  const { riderEmail } = req.query;
+    app.get("/parcels/rider", async (req, res) => {
+  try {
+    const { riderEmail, deliveryStatus } = req.query;
 
-  const query = {};
+    const query = {};
 
-  if(riderEmail){
-    query.riderEmail = riderEmail;
+    if (riderEmail) {
+      query.riderEmail = riderEmail;
+    }
+
+    if (deliveryStatus) {
+      query.deliveryStatus = deliveryStatus;
+    } else {
+      query.deliveryStatus = {
+        $nin: ["parcel_delivered"],
+      };
+    }
+
+    const cursor = parcelsCollection.find(query);
+    const result = await cursor.toArray();
+
+    res.send(result);
+  } catch (error) {
+    console.error("Error fetching rider parcels:", error);
+
+    res.status(500).send({
+      message: "Failed to fetch rider parcels",
+    });
   }
-
-  query.deliveryStatus = {
-    $nin: ["parcel_delivered"]
-  };
-
-  const cursor = parcelsCollection.find(query);
-  const result = await cursor.toArray();
-
-  res.send(result);
 });
-
 
     app.get('/parcels/rider/rejected', async(req, res) => {
   const {riderEmail} = req.query;

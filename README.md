@@ -1,6 +1,6 @@
 # ShiftexBD Server
 
-Backend API for **ShiftexBD**, a full-stack parcel delivery and management platform for parcel booking, online payment, tracking, rider management, delivery assignment, and role-based dashboard operations.
+Backend API for **ShiftexBD**, a full-stack parcel delivery and management platform for parcel booking, online payment, parcel tracking, rider management, delivery assignment, warehouse management, and role-based dashboard operations.
 
 ## 🌐 Project
 
@@ -9,131 +9,148 @@ Backend API for **ShiftexBD**, a full-stack parcel delivery and management platf
 - **Client Repository:** https://github.com/silent-43/shiftex-bd-client
 - **Server Repository:** https://github.com/silent-43/shiftex-bd-server
 
+---
+
 ## 🛠️ Technologies
 
 - Node.js
 - Express.js
 - MongoDB
 - Stripe
-- Firebase Admin
+- Firebase Admin SDK
+- Firebase Authentication
+- JWT
 - CORS
 - dotenv
 - Crypto
 - REST API
+
+---
 
 ## ✨ Features
 
 ### 📦 Parcel Management
 
 - Create new parcel delivery requests
+- Store sender and receiver information
+- Support document and non-document parcels
+- Store parcel weight and delivery information
+- Calculate delivery cost dynamically
+- Same District and Outside District pricing
 - Retrieve parcel information
-- Update parcel information and status
-- Delete parcels
+- Update parcel information
+- Update parcel delivery status
+- Delete unpaid parcels
 - Filter and sort parcels
 - Manage user-specific parcels
-- Track parcel delivery status
+- Store parcel payment information
+- Store parcel tracking information
+- Track parcel delivery progress
+
+---
+
+### 💰 Dynamic Delivery Pricing
+
+The backend calculates parcel delivery costs based on parcel type, weight, and delivery location.
+
+#### 📄 Document Parcel
+
+| Delivery Type    | Price |
+| ---------------- | ----: |
+| Same District    |   ৳80 |
+| Outside District |  ৳100 |
+
+#### 📦 Non-Document Parcel Up To 3kg
+
+| Delivery Type    | Price |
+| ---------------- | ----: |
+| Same District    |  ৳130 |
+| Outside District |  ৳170 |
+
+#### ⚖️ Non-Document Parcel Above 3kg
+
+- Additional **৳40 per extra kg**
+- Outside District delivery includes an additional **৳40 charge**
+
+Examples:
+
+| Parcel Weight | Same District | Outside District |
+| ------------- | ------------: | ---------------: |
+| 4kg           |          ৳170 |             ৳250 |
+| 5kg           |          ৳210 |             ৳290 |
+
+---
 
 ### 👤 User Management
 
-- Store and manage user information
+- Store user information
+- Create and update user records
+- Retrieve registered users
 - Role-based user management
 - Support for User, Rider, and Admin roles
 - Admin user management
 - Backend role verification
 - Protected role-specific API access
+- User-specific parcel access
+- User-specific payment information
+
+---
 
 ### 🔐 Authentication & Security
 
 - Firebase Authentication integration
 - Firebase Admin SDK
-- Secure Firebase ID token verification
+- Firebase ID token verification
 - JWT-based authorization
 - Role-based access control
 - Protected API endpoints
+- Admin-only API endpoints
+- Rider-specific API authorization
+- User-specific API authorization
 - CORS configuration
 - Environment variable based configuration
+- Secure credential management
+
+---
 
 ### 💳 Stripe Payment System
 
 - Stripe Checkout integration
 - Secure payment session creation
 - Payment verification
+- Payment success handling
 - Payment status management
 - Transaction ID storage
 - Payment history
+- Paid/unpaid parcel status
+- Payment information connected with parcel records
 - Prevent duplicate payment records
+- Duplicate payment-success request handling
 - Automatic tracking ID generation after successful payment
 
-### 🔎 Parcel Tracking
+---
+
+### 🆔 Tracking System
 
 - Automatically generate unique tracking IDs
+- Generate tracking ID after successful payment
 - Find parcels using tracking IDs
 - Track parcel delivery status
+- Store tracking history
 - Manage delivery progress
 - Synchronize parcel and rider delivery status
+- Maintain timeline-based tracking events
 
-### 🚴 Rider Management
-
-- Rider registration/application management
-- Admin rider approval
-- Admin rider rejection
-- Rider status management
-- View available riders
-- Assign riders to parcels
-- Manage rider-specific delivery data
-- Support rider delivery workflow
-
-### 🚚 Delivery Assignment
-
-- Assign individual parcels to riders
-- Maintain rider and parcel assignments
-- View assigned deliveries
-- Manage completed deliveries
-- Manage rejected deliveries
-- Update parcel status according to delivery progress
-- Support the complete rider delivery workflow
-
-### 🏢 Warehouse Management
-
-- Store warehouse information
-- Manage parcel handoff data
-- Support parcel movement through the delivery workflow
-- Maintain warehouse-related delivery information
-
-### 📊 Dashboard APIs
-
-Backend APIs provide role-specific data and functionality for:
-
-#### 👑 Admin
-
-- Manage users
-- Approve or reject riders
-- Assign riders to parcels
-- Manage parcels
-- View payment information
-- Manage delivery operations
-
-#### 🚴 Rider
-
-- View assigned deliveries
-- Manage delivery assignments
-- Complete deliveries
-- Reject delivery assignments
-- Update delivery status
-
-#### 👤 User
-
-- Create parcels
-- View personal parcels
-- View payment information
-- Track parcel delivery status
-
-## 🔎 Tracking ID
-
-A unique tracking ID is automatically generated after successful payment.
-
-Example:
+Supported tracking statuses include:
 
 ```text
-SBD-20260919-a7f3c2
+Pickup Pending
+      ↓
+Rider Assigned
+      ↓
+Rider Arriving
+      ↓
+Parcel Picked Up
+      ↓
+Parcel Delivered
 ```
